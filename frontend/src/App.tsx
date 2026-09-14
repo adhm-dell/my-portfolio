@@ -19,6 +19,9 @@ import { MediaManager } from './pages/admin/MediaManager';
 import { SkillsManager } from './pages/admin/SkillsManager';
 import { ExperienceManager } from './pages/admin/ExperienceManager';
 import { ProfileManager } from './pages/admin/ProfileManager';
+import { HeroManager } from './pages/admin/HeroManager';
+import { AboutManager } from './pages/admin/AboutManager';
+import { PhilosophyManager } from './pages/admin/PhilosophyManager';
 import { MessagesManager } from './pages/admin/MessagesManager';
 
 import { ProjectsPage } from './pages/ProjectsPage';
@@ -27,6 +30,9 @@ import { ExperiencePage } from './pages/ExperiencePage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { ProjectDetails } from './pages/ProjectDetails';
+import { PhilosophyPage } from './pages/PhilosophyPage';
+
+import { Philosophy } from './components/sections/Philosophy';
 
 const PublicLayout = () => (
   <div className="relative">
@@ -44,6 +50,7 @@ const Home = () => (
     <About />
     <Projects featuredOnly={true} />
     <TechStack featuredOnly={true} />
+    <Philosophy />
     <Experience featuredOnly={true} />
     <Contact />
   </>
@@ -60,13 +67,14 @@ function App() {
 
   return (
     <Routes>
-      {/* Public Site */}
+      {/* Public Routes */}
       <Route path="/" element={<PublicLayout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="projects" element={<ProjectsPage />} />
         <Route path="project/:slug" element={<ProjectDetails />} />
         <Route path="tech" element={<TechStackPage />} />
+        <Route path="philosophy" element={<PhilosophyPage />} />
         <Route path="experience" element={<ExperiencePage />} />
         <Route path="contact" element={<ContactPage />} />
       </Route>
@@ -77,11 +85,14 @@ function App() {
       {/* Admin Panel (with protected layout) */}
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard />} />
+        <Route path="profile" element={<ProfileManager />} />
+        <Route path="hero" element={<HeroManager />} />
+        <Route path="about" element={<AboutManager />} />
         <Route path="projects" element={<ProjectsManager />} />
         <Route path="media" element={<MediaManager />} />
         <Route path="skills" element={<SkillsManager />} />
+        <Route path="philosophy" element={<PhilosophyManager />} />
         <Route path="experience" element={<ExperienceManager />} />
-        <Route path="profile" element={<ProfileManager />} />
         <Route path="messages" element={<MessagesManager />} />
       </Route>
     </Routes>

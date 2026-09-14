@@ -13,10 +13,10 @@ async function main() {
   // 1. Create Admin User (Clean DB first if necessary, but here we just upsert)
   const passwordHash = await bcrypt.hash('admin123', 10);
   await prisma.adminUser.upsert({
-    where: { email: 'admin@adham.com' },
+    where: { email: 'admin@adhm.com' },
     update: {},
     create: {
-      email: 'admin@adham.com',
+      email: 'admin@adhm.com',
       passwordHash,
     },
   });
@@ -435,6 +435,92 @@ async function main() {
   await prisma.projectMedia.createMany({
     data: [
       { projectId: p6.id, type: MediaType.IMAGE, url: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1200&auto=format&fit=crop', titleEn: 'Reception', tagEn: 'Reception', tagAr: 'الاستقبال', order: 1 },
+    ]
+  });
+
+  // 7. Hero Settings
+  await prisma.heroSettings.deleteMany();
+  await prisma.heroSettings.create({
+    data: {
+      terminalCodeEn: `const engineer = {
+  name: 'Adham Salah',
+  degree: 'CS & IT Helwan (2026)',
+  stack: ['React 19', 'NestJS', 'Postgres'],
+  capabilities: ['Real-time', 'AI/LLM', 'Desktop'],
+  flagshipProduct: 'FR3ON FIT Ecosystem'
+};`,
+      terminalCodeAr: `const engineer = {
+  name: 'أدهم صلاح',
+  degree: 'حاسبات ومعلومات حلوان (2026)',
+  stack: ['React 19', 'NestJS', 'Postgres'],
+  capabilities: ['Real-time', 'AI/LLM', 'Desktop'],
+  flagshipProduct: 'FR3ON FIT Ecosystem'
+};`,
+      projectTitleEn: 'FR3ON FIT',
+      projectTitleAr: 'فرعون فيت',
+      projectDescEn: 'Complete fitness SaaS uniting coaches & athletes with automated AI workout/nutrition engines and real-time messaging.',
+      projectDescAr: 'منصة رياضية متكاملة لربط الكباتن بالمتدربين مع توليد أنظمة بالذكاء الاصطناعي.',
+      projectTagsEn: ['React', 'NextJS', 'OpenRouter AI', 'Socket.io'],
+      projectTagsAr: ['React', 'NextJS', 'OpenRouter AI', 'Socket.io'],
+      projectLink: '/project/fr3onfit'
+    }
+  });
+
+  // 8. About Features
+  await prisma.aboutFeature.deleteMany();
+  await prisma.aboutFeature.createMany({
+    data: [
+      {
+        titleEn: 'Architectural Depth',
+        titleAr: 'عمق معماري',
+        descriptionEn: 'Designing relational schemas, service-layer patterns, role authorization, and low-latency database queries before writing UI code.',
+        descriptionAr: 'تصميم قواعد البيانات، أنظمة الصلاحيات، واستعلامات سريعة قبل كتابة الكود.',
+        iconColor: 'bg-sky-900/60',
+        order: 1
+      },
+      {
+        titleEn: 'Production Infrastructure',
+        titleAr: 'بنية تحتية قوية',
+        descriptionEn: 'Linux VPS management, Docker containers, Nginx reverse proxy, CI/CD automated deployment, and automated backup pipelines.',
+        descriptionAr: 'إدارة سيرفرات لينكس، حاويات دوكر، والنشر التلقائي المستمر.',
+        iconColor: 'bg-emerald-900/60',
+        order: 2
+      }
+    ]
+  });
+
+  // 9. Philosophy Cards
+  await prisma.philosophyCard.deleteMany();
+  await prisma.philosophyCard.createMany({
+    data: [
+      {
+        categoryEn: 'ARCHITECTURE', categoryAr: 'المعمارية',
+        titleEn: 'Separation of Concerns', titleAr: 'فصل المسؤوليات',
+        descriptionEn: 'Strict isolation between controllers, services, repositories, and presentation components to keep codebases testable and clean.',
+        descriptionAr: 'فصل تام بين طبقات التطبيق للحفاظ على كود نظيف وقابل للاختبار.',
+        color: 'text-emerald-400', order: 1
+      },
+      {
+        categoryEn: 'TYPE SAFETY', categoryAr: 'أمان الأنواع',
+        titleEn: 'End-to-End Type Rigor', titleAr: 'صرامة الأنواع الشاملة',
+        descriptionEn: 'From database schemas (Prisma) up through API validation (Zod) and frontend clients, eliminating runtime contract mismatches.',
+        descriptionAr: 'حماية الأنواع من قاعدة البيانات وحتى الواجهات لمنع أخطاء وقت التشغيل.',
+        color: 'text-sky-400', order: 2
+      },
+      {
+        categoryEn: 'PERFORMANCE', categoryAr: 'الأداء',
+        titleEn: 'Latency & Data Efficiency', titleAr: 'كفاءة البيانات',
+        descriptionEn: 'Leveraging memory caching, indexed queries, optimistic UI updates, and lightweight payloads for instant responsiveness.',
+        descriptionAr: 'استخدام التخزين المؤقت وتحديثات الواجهة المتفائلة لسرعة استجابة فورية.',
+        color: 'text-amber-400', order: 3
+      },
+      {
+        categoryEn: 'RELIABILITY', categoryAr: 'الموثوقية',
+        titleEn: 'Production Readiness', titleAr: 'الجاهزية للإنتاج',
+        descriptionEn: 'Automated SSH deploys, database backup schedules, SSL enforcement, and container health checks ensure smooth live operations.',
+        descriptionAr: 'نشر تلقائي، نسخ احتياطي، وفحوصات صحة النظام لضمان استقرار العمليات.',
+        color: 'text-emerald-400', order: 4
+      }
     ]
   });
 

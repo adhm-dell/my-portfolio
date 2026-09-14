@@ -5,18 +5,19 @@ import { Link } from 'react-router';
 
 export function Navbar() {
   const { t, i18n } = useTranslation();
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState(() => document.documentElement.classList.contains('dark') ? 'dark' : 'light');
 
   // Handle language switch
   const toggleLanguage = () => {
-    const nextLang = i18n.language === 'en' ? 'ar' : 'en';
+    const nextLang = i18n.language.startsWith('en') ? 'ar' : 'en';
     i18n.changeLanguage(nextLang);
   };
 
-  // Optional theme toggle (prototype had dark by default)
+  // Theme toggle
   const toggleTheme = () => {
     const nextTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(nextTheme);
+    localStorage.theme = nextTheme;
     document.documentElement.classList.toggle('dark', nextTheme === 'dark');
   };
 
@@ -42,11 +43,11 @@ export function Navbar() {
           </div>
         </Link>
 
-        {/* Nav Links */}
         <div className="hidden md:flex items-center gap-1 text-sm font-medium text-slate-600 dark:text-slate-300">
           <Link to="/about" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.about')}</Link>
           <Link to="/projects" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.projects')}</Link>
           <Link to="/tech" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.tech')}</Link>
+          <Link to="/philosophy" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.philosophy')}</Link>
           <Link to="/experience" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.experience')}</Link>
           <Link to="/contact" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.contact')}</Link>
         </div>

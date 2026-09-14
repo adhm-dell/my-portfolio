@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, Outlet, Link, useLocation } from 'react-router';
-import { LayoutDashboard, Layers, Briefcase, User, Mail, LogOut, Code, Image as ImageIcon } from 'lucide-react';
+import { LayoutDashboard, Layers, Briefcase, User, Mail, LogOut, Code, Image as ImageIcon, Settings, Layout, Code2 } from 'lucide-react';
 import api from '../../lib/api';
 
 export function AdminLayout() {
@@ -38,7 +38,10 @@ export function AdminLayout() {
     { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
     { name: 'Projects', path: '/admin/projects', icon: Layers },
     { name: 'Media', path: '/admin/media', icon: ImageIcon },
-    { name: 'Skills', path: '/admin/skills', icon: Code },
+    { name: 'Hero', path: '/admin/hero', icon: Settings },
+    { name: 'About', path: '/admin/about', icon: Layout },
+    { name: 'Skills', path: '/admin/skills', icon: Code2 },
+    { name: 'Philosophy', path: '/admin/philosophy', icon: Layers },
     { name: 'Experience', path: '/admin/experience', icon: Briefcase },
     { name: 'Profile', path: '/admin/profile', icon: User },
     { name: 'Messages', path: '/admin/messages', icon: Mail },

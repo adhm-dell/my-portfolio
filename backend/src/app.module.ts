@@ -12,6 +12,9 @@ import { ContactModule } from './contact/contact.module';
 import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './upload/upload.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { PhilosophyModule } from './philosophy/philosophy.module';
+import { AboutFeaturesModule } from './about-features/about-features.module';
+import { HeroSettingsModule } from './hero-settings/hero-settings.module';
 
 @Module({
   imports: [
@@ -23,7 +26,7 @@ import { PrismaModule } from './prisma/prisma.module';
       rootPath: join(process.cwd(), 'uploads'),
       serveRoot: '/uploads',
     }),
-    ProfileModule, ProjectsModule, SkillsModule, ExperienceModule, ContactModule, AuthModule, UploadModule, PrismaModule
+    ProfileModule, ProjectsModule, SkillsModule, ExperienceModule, ContactModule, AuthModule, UploadModule, PrismaModule, PhilosophyModule, AboutFeaturesModule, HeroSettingsModule
   ],
   controllers: [AppController],
   providers: [AppService],

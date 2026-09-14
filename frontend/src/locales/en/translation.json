@@ -2,7 +2,8 @@
   "nav": {
     "about": "About",
     "projects": "Projects",
-    "tech": "Tech Stack",
+    "tech": "Skills",
+    "philosophy": "Architecture",
     "experience": "Experience",
     "contact": "Contact"
   },

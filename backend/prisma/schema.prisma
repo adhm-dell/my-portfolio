@@ -151,3 +151,68 @@ model ContactMessage {
   createdAt DateTime @default(now())
   isRead    Boolean  @default(false)
 }
+
+model PhilosophyCard {
+  id            String   @id @default(cuid())
+  categoryEn    String
+  categoryAr    String
+  titleEn       String
+  titleAr       String
+  descriptionEn String   @db.Text
+  descriptionAr String   @db.Text
+  color         String
+  order         Int      @default(0)
+}
+
+model AboutFeature {
+  id            String   @id @default(cuid())
+  titleEn       String
+  titleAr       String
+  descriptionEn String   @db.Text
+  descriptionAr String   @db.Text
+  iconColor     String
+  order         Int      @default(0)
+}
+
+model HeroSettings {
+  id             String   @id @default(cuid())
+  terminalCodeEn String   @db.Text
+  terminalCodeAr String   @db.Text
+  projectTitleEn String
+  projectTitleAr String
+  projectDescEn  String   @db.Text
+  projectDescAr  String   @db.Text
+  projectTagsEn  String[]
+  projectTagsAr  String[]
+  projectLink    String
+
+  // New text fields for Hero Section
+  badgeTextEn    String   @default("Full Stack Software Engineer & Product Builder")
+  badgeTextAr    String   @default("مهندس برمجيات ومطور منتجات رقمية")
+  
+  headingEn      String   @default("Building Scalable Digital Products")
+  headingAr      String   @default("بناء منتجات رقمية قابلة للتوسع")
+  
+  subHeadingEn   String   @default("From Idea to Production.")
+  subHeadingAr   String   @default("من مجرد فكرة إلى الإطلاق الفعلي.")
+  
+  descriptionEn  String   @db.Text @default("Passionate Full Stack Software Engineer crafting comprehensive, resilient web platforms, real-time engines, AI systems, and robust desktop applications.")
+  descriptionAr  String   @db.Text @default("مهندس برمجيات شغوف بتطوير منصات الويب الشاملة وتطبيقات سطح المكتب وأنظمة الذكاء الاصطناعي.")
+  
+  ctaTextEn      String   @default("Explore Work")
+  ctaTextAr      String   @default("تصفح الأعمال")
+
+  stat1Value     String   @default("3.65")
+  stat1LabelEn   String   @default("GPA")
+  stat1LabelAr   String   @default("المعدل")
+  stat1SubtextEn String   @default("Helwan FCI '26")
+  stat1SubtextAr String   @default("حاسبات حلوان 26'")
+
+  stat2Value     String   @default("1500+")
+  stat2SubtextEn String   @default("Exercises Built")
+  stat2SubtextAr String   @default("تمرين مبرمج")
+
+  stat3Value     String   @default("100%")
+  stat3SubtextEn String   @default("Production Ready")
+  stat3SubtextAr String   @default("جاهز للإنتاج")
+}
