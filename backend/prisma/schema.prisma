@@ -1,0 +1,151 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Project {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  category      String   // "saas" | "desktop" | "web"
+  badgeEn       String
+  badgeAr       String
+  order         Int      @default(0)
+  isFeatured    Boolean  @default(false)   // flagship = spans 2 columns
+
+  titleEn       String
+  titleAr       String
+  subtitleEn    String
+  subtitleAr    String
+  descriptionEn String   @db.Text
+  descriptionAr String   @db.Text
+  problemEn     String   @db.Text
+  problemAr     String   @db.Text
+  solutionEn    String   @db.Text
+  solutionAr    String   @db.Text
+
+  featuresEn    String[]
+  featuresAr    String[]
+
+  technologies  String[]
+
+  liveUrl       String?
+  githubUrl     String?
+  coverImageUrl String
+  year          Int
+
+  media         ProjectMedia[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model ProjectMedia {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  type        MediaType   // IMAGE | VIDEO_UPLOAD | YOUTUBE | VIMEO
+  url         String      // image URL, uploaded video URL, or full YouTube/Vimeo URL
+  titleEn     String?
+  titleAr     String?
+  tagEn       String?     // e.g. "Dashboard", "Mobile UI"
+  tagAr       String?
+  descriptionEn String?
+  descriptionAr String?
+  durationLabel String?   // e.g. "08:45" for display purposes on videos
+  order       Int      @default(0)
+
+  createdAt   DateTime @default(now())
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO_UPLOAD
+  YOUTUBE
+  VIMEO
+}
+
+model SkillCategory {
+  id        String   @id @default(cuid())
+  key       String   @unique // "frontend" | "backend" | "database" | "ai" | "desktop" | "devops"
+  titleEn   String
+  titleAr   String
+  subtitleEn String
+  subtitleAr String
+  icon      String   // lucide icon name
+  order     Int      @default(0)
+  skills    Skill[]
+}
+
+model Skill {
+  id              String        @id @default(cuid())
+  name            String        // tech names are shown as-is (e.g. "React 19"), no translation needed
+  categoryId      String
+  category        SkillCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  order           Int           @default(0)
+}
+
+model Experience {
+  id                String   @id @default(cuid())
+  roleEn            String
+  roleAr            String
+  company           String
+  durationLabel     String   // "6 Months"
+  descriptionEn     String   @db.Text
+  descriptionAr     String   @db.Text
+  responsibilitiesEn String[]
+  responsibilitiesAr String[]
+  location          String?
+  order             Int      @default(0)
+}
+
+model AboutContent {
+  id            String @id @default(cuid())
+  paragraphEn   String @db.Text
+  paragraphAr   String @db.Text
+  order         Int    @default(0)
+}
+
+model SiteProfile {
+  id                String  @id @default(cuid())
+  nameEn            String
+  nameAr            String
+  roleTitleEn       String
+  roleTitleAr       String
+  headlineEn        String
+  headlineAr        String
+  bioEn             String @db.Text
+  bioAr             String @db.Text
+  gpa               String
+  educationEn       String
+  educationAr       String
+  graduationYear    Int
+  linkedinUrl       String
+  githubUrl         String
+  email             String
+  cvFileUrl         String?
+}
+
+model AdminUser {
+  id           String @id @default(cuid())
+  email        String @unique
+  passwordHash String
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String   @db.Text
+  createdAt DateTime @default(now())
+  isRead    Boolean  @default(false)
+}

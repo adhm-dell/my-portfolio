@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "tech": "Tech Stack",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "subtitle": "I engineer scalable, high-performance web applications with modern architectures.",
+    "cta": "View My Work"
+  },
+  "common": {
+    "available_for_work": "Available",
+    "loading": "Loading...",
+    "error": "An error occurred"
+  }
+}
