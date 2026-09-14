@@ -3,12 +3,14 @@ import { useQuery } from '@tanstack/react-query';
 import { Layers } from 'lucide-react';
 import api from '../../lib/api';
 
-export function TechStack() {
+import { Link } from 'react-router';
+
+export function TechStack({ featuredOnly }: { featuredOnly?: boolean }) {
   const { t, i18n } = useTranslation();
   const { data: categories, isLoading } = useQuery({
-    queryKey: ['skills'],
+    queryKey: ['skills', featuredOnly],
     queryFn: async () => {
-      const { data } = await api.get('/skills');
+      const { data } = await api.get(featuredOnly ? '/skills?featured=true' : '/skills');
       return data;
     }
   });
@@ -22,6 +24,11 @@ export function TechStack() {
           {t('nav.tech')}
         </h2>
         <div className="h-px bg-gradient-to-l from-transparent to-slate-300 dark:to-dark-border flex-grow max-w-[100px]"></div>
+        {featuredOnly && (
+          <Link to="/tech" className="text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 transition-colors ml-4">
+            View All &rarr;
+          </Link>
+        )}
       </div>
 
       {isLoading ? (

@@ -10,7 +10,7 @@ export function SkillsManager() {
   // Category Modal State
   const [isCatModalOpen, setIsCatModalOpen] = useState(false);
   const [catEditingId, setCatEditingId] = useState<string | null>(null);
-  const [catForm, setCatForm] = useState({ key: '', titleEn: '', titleAr: '', subtitleEn: '', subtitleAr: '', icon: '', order: 0 });
+  const [catForm, setCatForm] = useState({ key: '', titleEn: '', titleAr: '', subtitleEn: '', subtitleAr: '', icon: '', order: 0, isFeatured: false });
 
   // Skill Item Modal State
   const [isSkillModalOpen, setIsSkillModalOpen] = useState(false);
@@ -54,10 +54,10 @@ export function SkillsManager() {
   const openCatModal = (cat?: any) => {
     if (cat) {
       setCatEditingId(cat.id);
-      setCatForm({ key: cat.key, titleEn: cat.titleEn, titleAr: cat.titleAr, subtitleEn: cat.subtitleEn, subtitleAr: cat.subtitleAr, icon: cat.icon, order: cat.order });
+      setCatForm({ key: cat.key, titleEn: cat.titleEn, titleAr: cat.titleAr, subtitleEn: cat.subtitleEn, subtitleAr: cat.subtitleAr, icon: cat.icon, order: cat.order, isFeatured: cat.isFeatured });
     } else {
       setCatEditingId(null);
-      setCatForm({ key: '', titleEn: '', titleAr: '', subtitleEn: '', subtitleAr: '', icon: '', order: (categories?.length || 0) + 1 });
+      setCatForm({ key: '', titleEn: '', titleAr: '', subtitleEn: '', subtitleAr: '', icon: '', order: (categories?.length || 0) + 1, isFeatured: false });
     }
     setIsCatModalOpen(true);
   };
@@ -115,7 +115,14 @@ export function SkillsManager() {
                 <tr key={cat.id} className="hover:bg-slate-700/50">
                   <td className="p-4 text-slate-300">{cat.order}</td>
                   <td className="p-4 font-mono text-sm text-brand-400">{cat.key}</td>
-                  <td className="p-4 font-medium text-white">{cat.titleEn}</td>
+                  <td className="p-4 font-medium text-white">
+                    <div className="flex items-center gap-2">
+                      {cat.titleEn}
+                      {cat.isFeatured && (
+                        <span className="bg-brand-500/20 text-brand-400 text-[10px] px-2 py-0.5 rounded border border-brand-500/30">Featured</span>
+                      )}
+                    </div>
+                  </td>
                   <td className="p-4 text-slate-300">
                     <div className="w-6 h-6" dangerouslySetInnerHTML={{__html: cat.icon}}></div>
                   </td>
@@ -179,6 +186,12 @@ export function SkillsManager() {
                 <div>
                   <label className="block text-sm font-medium text-slate-400 mb-1">Order</label>
                   <input type="number" className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" value={catForm.order} onChange={e => setCatForm({...catForm, order: parseInt(e.target.value)})} />
+                </div>
+                <div className="flex items-center mt-6">
+                  <label className="flex items-center gap-2 cursor-pointer text-white">
+                    <input type="checkbox" className="form-checkbox bg-slate-800 border-slate-700 text-brand-500 rounded focus:ring-brand-500 focus:ring-offset-slate-900 w-5 h-5 transition-all" checked={catForm.isFeatured} onChange={e => setCatForm({...catForm, isFeatured: e.target.checked})} />
+                    Is Featured
+                  </label>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-400 mb-1">Title (En)</label>

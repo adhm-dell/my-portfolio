@@ -81,8 +81,9 @@ model SkillCategory {
   titleAr   String
   subtitleEn String
   subtitleAr String
-  icon      String   // lucide icon name
-  order     Int      @default(0)
+  icon       String   // lucide icon name
+  isFeatured Boolean  @default(false)
+  order      Int      @default(0)
   skills    Skill[]
 }
 
@@ -104,8 +105,9 @@ model Experience {
   descriptionAr     String   @db.Text
   responsibilitiesEn String[]
   responsibilitiesAr String[]
-  location          String?
-  order             Int      @default(0)
+  location           String?
+  isFeatured         Boolean  @default(false)
+  order              Int      @default(0)
 }
 
 model AboutContent {

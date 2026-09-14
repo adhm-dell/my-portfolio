@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Globe, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router';
 
 export function Navbar() {
   const { t, i18n } = useTranslation();
@@ -23,7 +24,7 @@ export function Navbar() {
     <header className="sticky top-4 z-40 max-w-7xl mx-auto px-4 sm:px-6">
       <nav className="glass-panel rounded-2xl px-5 py-3 flex items-center justify-between shadow-2xl shadow-black/40 border border-dark-border/80">
         {/* Logo & Status */}
-        <a href="#hero" className="flex items-center gap-3 group">
+        <Link to="/" className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-sky-500 p-0.5 flex items-center justify-center shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform duration-300">
             <div className="w-full h-full bg-dark-bg rounded-[10px] flex items-center justify-center">
               <span className="font-mono font-bold text-lg text-brand-400">AS</span>
@@ -39,15 +40,15 @@ export function Navbar() {
             </div>
             <span className="text-xs text-slate-500 dark:text-slate-400 block font-mono">Full Stack Engineer</span>
           </div>
-        </a>
+        </Link>
 
         {/* Nav Links */}
         <div className="hidden md:flex items-center gap-1 text-sm font-medium text-slate-600 dark:text-slate-300">
-          <a href="#about" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.about')}</a>
-          <a href="#projects" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.projects')}</a>
-          <a href="#skills" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.tech')}</a>
-          <a href="#experience" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.experience')}</a>
-          <a href="#contact" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.contact')}</a>
+          <Link to="/about" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.about')}</Link>
+          <Link to="/projects" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.projects')}</Link>
+          <Link to="/tech" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.tech')}</Link>
+          <Link to="/experience" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.experience')}</Link>
+          <Link to="/contact" className="px-3.5 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition">{t('nav.contact')}</Link>
         </div>
 
         {/* Actions */}
@@ -62,10 +63,10 @@ export function Navbar() {
             <span className="text-[10px] text-brand-600 dark:text-brand-400 font-mono bg-brand-500/10 px-1.5 py-0.5 rounded border border-brand-500/20">{i18n.language === 'en' ? 'AR' : 'EN'}</span>
           </button>
 
-          <a href="#contact" className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-brand-500 to-sky-500 hover:from-brand-600 hover:to-sky-600 text-white dark:text-dark-bg font-semibold text-xs px-4 py-2 rounded-xl transition shadow-lg shadow-brand-500/20 active:scale-95">
+          <Link to="/contact" className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-brand-500 to-sky-500 hover:from-brand-600 hover:to-sky-600 text-white dark:text-dark-bg font-semibold text-xs px-4 py-2 rounded-xl transition shadow-lg shadow-brand-500/20 active:scale-95">
             <span>Let's Talk</span>
             <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
-          </a>
+          </Link>
         </div>
       </nav>
     </header>

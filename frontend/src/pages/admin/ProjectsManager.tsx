@@ -160,7 +160,14 @@ export function ProjectsManager() {
                     <span className="ml-2 w-4 text-center">{project.order}</span>
                   </div>
                 </td>
-                <td className="p-4 font-medium text-white">{project.titleEn}</td>
+                <td className="p-4 font-medium text-white">
+                  <div className="flex items-center gap-2">
+                    {project.titleEn}
+                    {project.isFeatured && (
+                      <span className="bg-brand-500/20 text-brand-400 text-[10px] px-2 py-0.5 rounded border border-brand-500/30">Featured</span>
+                    )}
+                  </div>
+                </td>
                 <td className="p-4 text-slate-400 capitalize">{project.category}</td>
                 <td className="p-4 flex gap-2">
                   <button onClick={() => openModal(project)} className="text-sky-400 hover:text-sky-300 p-2"><Edit className="w-4 h-4" /></button>

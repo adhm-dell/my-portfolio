@@ -3,12 +3,14 @@ import { useQuery } from '@tanstack/react-query';
 import { Briefcase } from 'lucide-react';
 import api from '../../lib/api';
 
-export function Experience() {
+import { Link } from 'react-router';
+
+export function Experience({ featuredOnly }: { featuredOnly?: boolean }) {
   const { t, i18n } = useTranslation();
   const { data: experience, isLoading } = useQuery({
-    queryKey: ['experience'],
+    queryKey: ['experience', featuredOnly],
     queryFn: async () => {
-      const { data } = await api.get('/experience');
+      const { data } = await api.get(featuredOnly ? '/experience?featured=true' : '/experience');
       return data;
     }
   });
@@ -20,6 +22,11 @@ export function Experience() {
           <Briefcase className="w-6 h-6 text-brand-500" />
           {t('nav.experience')}
         </h2>
+        {featuredOnly && (
+          <Link to="/experience" className="text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 transition-colors ml-4">
+            View All &rarr;
+          </Link>
+        )}
       </div>
 
       {isLoading ? (

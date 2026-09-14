@@ -21,6 +21,11 @@ import { ExperienceManager } from './pages/admin/ExperienceManager';
 import { ProfileManager } from './pages/admin/ProfileManager';
 import { MessagesManager } from './pages/admin/MessagesManager';
 
+import { ProjectsPage } from './pages/ProjectsPage';
+import { TechStackPage } from './pages/TechStackPage';
+import { ExperiencePage } from './pages/ExperiencePage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
 import { ProjectDetails } from './pages/ProjectDetails';
 
 const PublicLayout = () => (
@@ -37,9 +42,9 @@ const Home = () => (
   <>
     <Hero />
     <About />
-    <Projects />
-    <TechStack />
-    <Experience />
+    <Projects featuredOnly={true} />
+    <TechStack featuredOnly={true} />
+    <Experience featuredOnly={true} />
     <Contact />
   </>
 );
@@ -58,7 +63,12 @@ function App() {
       {/* Public Site */}
       <Route path="/" element={<PublicLayout />}>
         <Route index element={<Home />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="projects" element={<ProjectsPage />} />
         <Route path="project/:slug" element={<ProjectDetails />} />
+        <Route path="tech" element={<TechStackPage />} />
+        <Route path="experience" element={<ExperiencePage />} />
+        <Route path="contact" element={<ContactPage />} />
       </Route>
       
       {/* Admin Login (without layout) */}

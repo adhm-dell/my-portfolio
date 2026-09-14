@@ -19,6 +19,7 @@ export function ExperienceManager() {
     responsibilitiesAr: '', // we will split by newline
     location: '',
     order: 0,
+    isFeatured: false,
   });
 
   const { data: experiences, isLoading } = useQuery({
@@ -66,6 +67,7 @@ export function ExperienceManager() {
         responsibilitiesAr: exp.responsibilitiesAr.join('\n'),
         location: exp.location || '',
         order: exp.order,
+        isFeatured: exp.isFeatured,
       });
     } else {
       setEditingId(null);
@@ -73,6 +75,7 @@ export function ExperienceManager() {
         roleEn: '', roleAr: '', company: '', durationLabel: '',
         descriptionEn: '', descriptionAr: '', responsibilitiesEn: '',
         responsibilitiesAr: '', location: '', order: (experiences?.length || 0) + 1,
+        isFeatured: false,
       });
     }
     setIsModalOpen(true);
@@ -124,7 +127,14 @@ export function ExperienceManager() {
             {experiences?.map((exp: any) => (
               <tr key={exp.id} className="hover:bg-slate-700/50">
                 <td className="p-4 text-slate-300">{exp.order}</td>
-                <td className="p-4 font-medium text-white">{exp.roleEn}</td>
+                <td className="p-4 font-medium text-white">
+                  <div className="flex items-center gap-2">
+                    {exp.roleEn}
+                    {exp.isFeatured && (
+                      <span className="bg-brand-500/20 text-brand-400 text-[10px] px-2 py-0.5 rounded border border-brand-500/30">Featured</span>
+                    )}
+                  </div>
+                </td>
                 <td className="p-4 text-slate-300">{exp.company}</td>
                 <td className="p-4 text-slate-300">{exp.durationLabel}</td>
                 <td className="p-4 flex gap-2">
@@ -204,6 +214,12 @@ export function ExperienceManager() {
                 <div>
                   <label className="block text-sm font-medium text-slate-400 mb-1">Order</label>
                   <input type="number" className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" value={formData.order} onChange={e => setFormData({...formData, order: parseInt(e.target.value)})} />
+                </div>
+                <div className="flex items-center mt-6">
+                  <label className="flex items-center gap-2 cursor-pointer text-white">
+                    <input type="checkbox" className="form-checkbox bg-slate-800 border-slate-700 text-brand-500 rounded focus:ring-brand-500 focus:ring-offset-slate-900 w-5 h-5 transition-all" checked={formData.isFeatured} onChange={e => setFormData({...formData, isFeatured: e.target.checked})} />
+                    Is Featured
+                  </label>
                 </div>
               </div>
 

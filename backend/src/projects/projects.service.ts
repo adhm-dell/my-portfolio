@@ -5,8 +5,9 @@ import { PrismaService } from '../prisma/prisma.service';
 export class ProjectsService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll() {
+  async findAll(isFeatured?: boolean) {
     return this.prisma.project.findMany({
+      where: isFeatured !== undefined ? { isFeatured } : undefined,
       orderBy: { order: 'asc' },
       include: {
         media: {

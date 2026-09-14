@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ProjectsService } from './projects.service';
 
 @Controller('api/v1/projects')
@@ -6,8 +6,9 @@ export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Get()
-  findAll() {
-    return this.projectsService.findAll();
+  findAll(@Query('featured') featured?: string) {
+    const isFeatured = featured === 'true';
+    return this.projectsService.findAll(featured ? isFeatured : undefined);
   }
 
   @Get(':slug')

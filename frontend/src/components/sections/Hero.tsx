@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Layers, Mail } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../icons';
+import { Link } from 'react-router';
 
 export function Hero() {
   const { t } = useTranslation();
@@ -46,16 +47,16 @@ export function Hero() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
-            <a href="#projects" className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-dark-bg hover:bg-slate-800 dark:hover:bg-slate-200 font-bold text-sm transition shadow-xl active:scale-95">
+            <Link to="/projects" className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-dark-bg hover:bg-slate-800 dark:hover:bg-slate-200 font-bold text-sm transition shadow-xl active:scale-95">
               <Layers className="w-4 h-4 text-brand-400 dark:text-brand-600" />
               <span>{t('hero.cta')}</span>
               <span className="w-5 h-5 rounded-full bg-white dark:bg-dark-bg text-slate-900 dark:text-white text-[11px] flex items-center justify-center font-mono font-bold">5+</span>
-            </a>
+            </Link>
 
-            <a href="#contact" className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl glass-panel hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm transition border border-slate-300 dark:border-dark-borderLight active:scale-95">
+            <Link to="/contact" className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl glass-panel hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm transition border border-slate-300 dark:border-dark-borderLight active:scale-95">
               <Mail className="w-4 h-4 text-sky-600 dark:text-sky-400" />
               <span>Contact Me</span>
-            </a>
+            </Link>
 
             <a href="https://github.com/adhm-dell" target="_blank" rel="noopener noreferrer" className="p-3.5 rounded-xl glass-panel hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition border border-slate-300 dark:border-dark-borderLight active:scale-95">
               <GithubIcon className="w-5 h-5" />

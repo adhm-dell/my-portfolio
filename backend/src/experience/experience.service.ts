@@ -5,8 +5,9 @@ import { PrismaService } from '../prisma/prisma.service';
 export class ExperienceService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll() {
+  async findAll(isFeatured?: boolean) {
     return this.prisma.experience.findMany({
+      where: isFeatured !== undefined ? { isFeatured } : undefined,
       orderBy: { order: 'asc' }
     });
   }
